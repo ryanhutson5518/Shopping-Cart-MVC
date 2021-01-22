@@ -1,0 +1,92 @@
+﻿
+
+
+
+<div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-5 text-center pb-5 pb-md-0">
+            <h5>@Model.Description</h5>
+            <img src="~/@Model.Image" class="img-fluid pt-5" />
+        </div>
+        <div class="col-12 col-md-4">
+            <p>@Model.LongDescription</p>
+        </div>
+        <div class="col-10 col-md-3 border pt-5 pb-5 text-center mt-4 mt-md-0">
+            @if (Model.FreeShipping && Model.OnSale)
+            {
+                <i class="fas fa-check text-success"></i>
+                <h6 class="d-inline">Sale</h6>
+
+                <br />
+
+                <i class="fas fa-check text-success"></i>
+                <h6 class="d-inline">Free Shipping</h6>
+
+                <p class="text-muted">$@Model.Price - $@Model.SalePrice =</p>
+                <h1>$@(Model.Price - Model.SalePrice)</h1>
+            }
+
+            else if (Model.FreeShipping && (Model.OnSale == false))
+            {
+                <i class="fas fa-times text-danger"></i>
+                <h6 class="d-inline">Sale</h6>
+
+                <br />
+
+                <i class="fas fa-check text-success"></i>
+                <h6 class="d-inline">Free Shipping</h6>
+
+                <h1>$@Model.Price</h1>
+            }
+
+            else if ((Model.FreeShipping == false) && Model.OnSale)
+            {
+                <i class="fas fa-check text-success"></i>
+                <h6 class="d-inline">Sale</h6>
+
+                <br />
+
+                <i class="fas fa-times text-danger"></i>
+                <h6 class="d-inline">Free Shipping</h6>
+
+                <p class="text-muted">$@Model.Price - $@Model.SalePrice + $@Model.ShippingCost</p>
+                <h1>$@(Model.Price - Model.SalePrice + Model.ShippingCost)</h1>
+            }
+            else if ((Model.FreeShipping == false) && (Model.OnSale == false))
+            {
+                <i class="fas fa-times text-danger"></i>
+                <h6 class="d-inline">Sale</h6>
+
+                <br />
+
+                <i class="fas fa-times text-danger"></i>
+                <h6 class="d-inline">Free Shipping</h6>
+
+                <p class="text-muted">$@Model.Price + $@Model.ShippingCost</p>
+                <h1>$@(Model.Price + Model.ShippingCost)</h1>
+            }
+
+            <br />
+
+            @if (Model.InStock)
+            {
+                <p class="text-success">In Stock: @Model.NumInStock</p>
+
+                <button class="btn btn-info text-white">
+                    Add to Cart
+                </button>
+            }
+            else
+            {
+                <h1 class="text-danger">Out of Stock</h1>
+
+                <br />
+
+                <button disabled class="btn btn-info text-white">
+                    Add to Cart
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
